@@ -19,8 +19,8 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.1.0",
-    "cdcchen/file-helper": "^1.0.0",
-    "cdcchen/curl-client": "^2.0.0"
+    "cdcchen/http-client": "^1.0",
+    "cdcchen/wechat-common": "dev-master"
   },
   "autoload": {
     "psr-4": {
