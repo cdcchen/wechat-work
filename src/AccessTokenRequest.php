@@ -33,7 +33,7 @@ class AccessTokenRequest extends ApiRequest
      */
     public function setCorpId(string $id): self
     {
-        $this->queryParams->set('corp_id', $id);
+        $this->queryParams->set('corpid', $id);
         return $this;
     }
 
@@ -42,7 +42,7 @@ class AccessTokenRequest extends ApiRequest
      */
     public function getCorpId(): ?string
     {
-        return $this->queryParams->get('corp_id');
+        return $this->queryParams->get('corpid');
     }
 
     /**
@@ -51,7 +51,7 @@ class AccessTokenRequest extends ApiRequest
      */
     public function setCorpSecret(string $secret): self
     {
-        $this->queryParams->set('corp_secret', $secret);
+        $this->queryParams->set('corpsecret', $secret);
         return $this;
     }
 
@@ -60,6 +60,6 @@ class AccessTokenRequest extends ApiRequest
      */
     public function getCorpSecret(): ?string
     {
-        return $this->queryParams->get('corp_secret');
+        return $this->queryParams->get('corpsecret');
     }
 }

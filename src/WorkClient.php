@@ -9,7 +9,11 @@
 namespace cdcchen\wechat\work;
 
 
+use cdcchen\http\Formatter;
+use cdcchen\http\HttpResponse;
+use cdcchen\wechat\common\AccessToken;
 use cdcchen\wechat\common\ApiClient;
+use cdcchen\wechat\common\ApiException;
 use cdcchen\wechat\common\ApiRequest;
 use Psr\Http\Message\ResponseInterface;
 
@@ -24,17 +28,24 @@ class WorkClient extends ApiClient
         $this->corpSecret = $corpSecret;
     }
 
+    /**
+     * @param ResponseInterface|HttpResponse $response
+     * @return string
+     */
     protected function handleResponse(ResponseInterface $response)
     {
-        return $response->getBody()->getContents();
+        $response->setFormat(Formatter::FORMAT_JSON);
+        return $response->getData();
     }
 
-    public function getAccessToken()
+    /**
+     * @return AccessToken
+     * @throws ApiException
+     */
+    public function getAccessToken(): AccessToken
     {
-        $request = new AccessTokenRequest();
-        $request->setCorpId($this->corpId)->setCorpSecret($this->corpSecret);
-
-        return $this->request($request);
+        $client = new AccessTokenClient($this->corpId, $this->corpSecret);
+        return $client->getToken();
     }
 
     public function getClient(string $requestClassName)
