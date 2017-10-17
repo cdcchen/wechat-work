@@ -6,17 +6,17 @@
  * Time: 14:24
  */
 
-namespace cdcchen\wechat\work;
+namespace cdcchen\wework\contact;
 
 
-use cdcchen\wechat\common\ApiRequest;
+use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
 /**
  * Class CreateUserRequest
- * @package cdcchen\wechat\work
+ * @package cdcchen\wework
  */
-class CreateUserRequest extends ApiRequest
+class CreateUserRequest extends BaseRequest
 {
     /**
      * @var string

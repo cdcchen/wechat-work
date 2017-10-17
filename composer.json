@@ -1,7 +1,13 @@
 {
   "name": "cdcchen/wechat-work",
   "description": "work weixin sdk",
-  "keywords": ["weixin", "wechat", "work wechat", "企业微信", "sdk"],
+  "keywords": [
+    "weixin",
+    "wechat",
+    "work wechat",
+    "企业微信",
+    "sdk"
+  ],
   "homepage": "https://github.com/cdcchen/wechat-work",
   "time": "2017-06-24 19:40:01",
   "license": "BSD-4-Clause",
@@ -19,12 +25,11 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.1.0",
-    "cdcchen/http-client": "^1.0",
-    "cdcchen/wechat-common": "dev-master"
+    "cdcchen/http-client": "^1.0"
   },
   "autoload": {
     "psr-4": {
-      "cdcchen\\wechat\\work\\": "src/"
+      "cdcchen\\wework\\": "src/"
     }
   },
   "extra": {

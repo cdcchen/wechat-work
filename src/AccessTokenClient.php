@@ -6,56 +6,46 @@
  * Time: 13:40
  */
 
-namespace cdcchen\wechat\work;
+namespace cdcchen\wework;
 
 
-use cdcchen\http\Formatter;
-use cdcchen\http\HttpResponse;
-use cdcchen\wechat\common\AccessToken;
-use cdcchen\wechat\common\ApiClient;
-use cdcchen\wechat\common\ApiException;
-use Psr\Http\Message\ResponseInterface;
+use cdcchen\wework\base\AccessToken;
+use cdcchen\wework\base\ApiException;
+use cdcchen\wework\base\AppCredential;
+use cdcchen\wework\base\ClientTrait;
 
 /**
  * Class AccessTokenClient
- * @package cdcchen\wechat\work
+ * @package cdcchen\wework
  */
-class AccessTokenClient extends ApiClient
+class AccessTokenClient
 {
-    /**
-     * @var string
-     */
-    protected $corpId;
-    /**
-     * @var string
-     */
-    protected $corpSecret;
+    use ClientTrait;
 
     /**
-     * AccessTokenClient constructor.
-     * @param string $corpId
-     * @param string $corpSecret
+     * @var AppCredential
      */
-    public function __construct(string $corpId, string $corpSecret)
+    protected $credential;
+
+    public function __construct(AppCredential $credential)
     {
-        $this->corpId = $corpId;
-        $this->corpSecret = $corpSecret;
+        $this->credential = $credential;
     }
 
     /**
-     * @param ResponseInterface|HttpResponse $response
-     * @return AccessToken
-     * @throws ApiException
+     * @param AppCredential $credential
      */
-    protected function handleResponse(ResponseInterface $response): AccessToken
+    public function setCredential(AppCredential $credential): void
     {
-        $data = $response->getData();
+        $this->credential = $credential;
+    }
 
-        if ($data['errcode'] == 0) {
-            return new AccessToken($data['access_token'], $data['expires_in']);
-        }
-
-        throw new ApiException($data['errmsg'], $data['errcode']);
+    /**
+     * @return AppCredential|null
+     */
+    public function getCredential(): ?AppCredential
+    {
+        return $this->credential;
     }
 
     /**
@@ -65,8 +55,10 @@ class AccessTokenClient extends ApiClient
     public function getToken(): AccessToken
     {
         $request = new AccessTokenRequest();
-        $request->setCorpId($this->corpId)->setCorpSecret($this->corpSecret);
+        $request->setCorpId($this->credential->getId())->setCorpSecret($this->credential->getSecret());
+        $response = $this->request($request);
+        $data = $response->getData();
 
-        return $this->request($request);
+        return new AccessToken($data['access_token'], $data['expires_in']);
     }
 }

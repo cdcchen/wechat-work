@@ -6,7 +6,7 @@
  * Time: 17:58
  */
 
-use cdcchen\wechat\work\CreateUserRequest;
+use cdcchen\wework\contact\CreateUserRequest;
 use PHPUnit\Framework\TestCase;
 
 class CreateUserRequestTest extends TestCase

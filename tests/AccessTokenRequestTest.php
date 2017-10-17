@@ -6,7 +6,7 @@
  * Time: 17:58
  */
 
-use cdcchen\wechat\work\AccessTokenRequest;
+use cdcchen\wework\AccessTokenRequest;
 use PHPUnit\Framework\TestCase;
 
 class AccessTokenRequestTest extends TestCase
