@@ -9,9 +9,8 @@
 namespace cdcchen\wechat\work\contact;
 
 
-use cdcchen\wework\base\ClientTrait;
+use cdcchen\wework\base\BaseClient;
 
-class BatchClient
+class BatchClient extends BaseClient
 {
-    use ClientTrait;
 }

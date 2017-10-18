@@ -9,92 +9,107 @@
 namespace cdcchen\wework\contact;
 
 
-use cdcchen\wework\base\ClientTrait;
+use cdcchen\wework\base\BaseClient;
 
-class UserClient
+/**
+ * Class UserClient
+ * @package cdcchen\wework\contact
+ */
+class UserClient extends BaseClient
 {
-    use ClientTrait;
-
-    public function create(CreateUserRequest $request): bool
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function create(User $user): bool
     {
-        $this->request($request);
-        return true;
+        $request = (new CreateUserRequest())->setUserInfo($user);
+        return $this->send($request);
     }
 
+    /**
+     * @param string $userId
+     * @return array
+     */
     public function get(string $userId): array
     {
-        $request = new GetUserRequest();
-        $request->setUserId($userId);
-        $response = $this->request($request);
-        $data = $response->getData();
-        unset($data['errcode'], $data['errmsg']);
-
-        return $data;
+        $request = (new GetUserRequest())->setUserId($userId);
+        return $this->send($request);
     }
 
-    public function update(UpdateUserRequest $request): bool
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function update(User $user): bool
     {
-        $this->request($request);
-        return true;
+        $request = (new UpdateUserRequest())->setUserInfo($user);
+        return $this->send($request);
     }
 
+    /**
+     * @param string $userId
+     * @return bool
+     */
     public function delete(string $userId): bool
     {
-        $request = new DeleteUserRequest();
-        $request->setUserId($userId);
-        $this->request($request);
-        return true;
+        $request = (new DeleteUserRequest())->setUserId($userId);
+        return $this->send($request);
     }
 
+    /**
+     * @param array $userIdList
+     * @return bool
+     */
     public function batchDelete(array $userIdList): bool
     {
-        $request = new BatchDeleteUserRequest();
-        $request->setUserIdList($userIdList);
-        $this->request($request);
-        return true;
+        $request = (new BatchDeleteUserRequest())->setUserIdList($userIdList);
+        return $this->send($request);
     }
 
+    /**
+     * @param int $departmentId
+     * @param bool $fetchChild
+     * @return array
+     */
     public function getSimpleList(int $departmentId, bool $fetchChild = false): array
     {
         $request = new UserSimpleListRequest();
         $request->setDepartmentId($departmentId)->setFetchChild($fetchChild);
-        $response = $this->request($request);
-        $data = $response->getData();
-
-        return $data['userlist'];
+        return $this->send($request);
     }
 
+    /**
+     * @param int $departmentId
+     * @param bool $fetchChild
+     * @return array
+     */
     public function getDetailList(int $departmentId, bool $fetchChild = false): array
     {
         $request = new UserDetailListRequest();
         $request->setDepartmentId($departmentId)->setFetchChild($fetchChild);
-        $response = $this->request($request);
-        $data = $response->getData();
-
-        return $data['userlist'];
+        return $this->send($request);
     }
 
+    /**
+     * @param string $userId
+     * @param string $agentId
+     * @return array
+     */
     public function getOpenId(string $userId, string $agentId): array
     {
         $request = new ConvertToOpenIdRequest();
         $request->setUserId($userId)->setAgentId($agentId);
-        $response = $this->request($request);
-        $data = $response->getData();
-        unset($data['errcode'], $data['errmsg']);
-
-        return $data;
+        return $this->send($request);
     }
 
+    /**
+     * @param string $userId
+     * @return array
+     */
     public function authSuccess(string $userId): array
     {
-        $request = new UserAuthSuccessRequest();
-        $request->setUserId($userId);
-        $response = $this->request($request);
-        $data = $response->getData();
-        unset($data['errcode'], $data['errmsg']);
-
-        return $data;
+        $request = (new UserAuthSuccessRequest())->setUserId($userId);
+        return $this->send($request);
     }
-
-
 }

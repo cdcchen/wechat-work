@@ -9,6 +9,8 @@
 namespace cdcchen\wework;
 
 
+use cdcchen\http\HttpResponse;
+use cdcchen\wework\base\AccessToken;
 use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
@@ -29,11 +31,13 @@ class AccessTokenRequest extends BaseRequest
 
     /**
      * @param string $id
+     * @param string $secret
      * @return AccessTokenRequest
      */
-    public function setCorpId(string $id): self
+    public function setCredential(string $id, string $secret): self
     {
         $this->queryParams->set('corpid', $id);
+        $this->queryParams->set('corpsecret', $secret);
         return $this;
     }
 
@@ -46,20 +50,16 @@ class AccessTokenRequest extends BaseRequest
     }
 
     /**
-     * @param string $secret
-     * @return AccessTokenRequest
-     */
-    public function setCorpSecret(string $secret): self
-    {
-        $this->queryParams->set('corpsecret', $secret);
-        return $this;
-    }
-
-    /**
      * @return null|string
      */
     public function getCorpSecret(): ?string
     {
         return $this->queryParams->get('corpsecret');
+    }
+
+    protected function handleResponse(HttpResponse $response): AccessToken
+    {
+        $data = $response->getData();
+        return new AccessToken($data['access_token'], $data['expires_in']);
     }
 }

@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: chendong
- * Date: 2017/10/16
- * Time: 16:31
+ * Date: 2017/10/17
+ * Time: 16:28
  */
 
 namespace cdcchen\wework\base;
 
 
-class ApiException extends \Exception
+class ErrorCode
 {
-
+    const OK = 0;
 }

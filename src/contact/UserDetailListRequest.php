@@ -9,10 +9,15 @@
 namespace cdcchen\wework\contact;
 
 
+use cdcchen\http\HttpResponse;
 use cdcchen\wework\base\BaseRequest;
+use Fig\Http\Message\RequestMethodInterface;
 
 class UserDetailListRequest extends BaseRequest
 {
+    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/user/list';
+    protected $method = RequestMethodInterface::METHOD_GET;
+
     public function setDepartmentId(int $id): self
     {
         $this->queryParams->set('department_id', $id);
@@ -33,5 +38,12 @@ class UserDetailListRequest extends BaseRequest
     public function getFetchChild()
     {
         return $this->queryParams->get('fetch_child');
+    }
+
+    protected function handleResponse(HttpResponse $response): array
+    {
+        $data = $response->getData();
+        unset($data['errcode'], $data['errmsg']);
+        return $data['userlist'];
     }
 }

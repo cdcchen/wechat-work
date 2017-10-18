@@ -24,7 +24,7 @@ trait ClientTrait
      * @param BaseRequest $request
      * @return HttpResponse
      * @throws RequestException
-     * @throws ApiException
+     * @throws ApiError
      */
     public function request(BaseRequest $request)
     {
@@ -41,6 +41,6 @@ trait ClientTrait
             return $response;
         }
 
-        throw new ApiException($data['errmsg'], $errorCode);
+        throw new ApiError($data['errmsg'], $errorCode);
     }
 }

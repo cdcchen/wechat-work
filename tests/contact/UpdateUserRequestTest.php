@@ -8,20 +8,20 @@
 
 namespace contact;
 
-use cdcchen\wework\contact\CreateUserRequest;
+use cdcchen\wework\contact\UpdateUserRequest;
 use cdcchen\wework\contact\User;
 use PHPUnit\Framework\TestCase;
 
-class CreateUserRequestTest extends TestCase
+class UpdateUserRequestTest extends TestCase
 {
     /**
-     * @var CreateUserRequest
+     * @var UpdateUserRequest
      */
     private $request;
 
     public function setUp()
     {
-        $this->request = new CreateUserRequest();
+        $this->request = new UpdateUserRequest();
     }
 
     public function testSetUserInfo()
@@ -51,7 +51,7 @@ class CreateUserRequestTest extends TestCase
     {
         $token = 'kasdf90ajf0a9sdfu2893jf2i3f';
         $this->request->setAccessToken($token);
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token=' . $token;
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/update?access_token=' . $token;
         $this->assertEquals($url, (string)$this->request->getUri());
     }
 
@@ -59,7 +59,7 @@ class CreateUserRequestTest extends TestCase
     {
         $token = 'kasdf90ajf0a9sdfu2893jf2i3f';
         $this->request->setAccessToken($token);
-        $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token=' . $token;
+        $url = 'https://qyapi.weixin.qq.com/cgi-bin/user/update?access_token=' . $token;
         $this->assertEquals($url, (string)$this->request->getRequest()->getUri());
     }
 

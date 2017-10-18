@@ -7,6 +7,7 @@
  */
 
 use cdcchen\wework\AccessTokenRequest;
+use cdcchen\wework\base\AccessToken;
 use PHPUnit\Framework\TestCase;
 
 class AccessTokenRequestTest extends TestCase
@@ -21,30 +22,61 @@ class AccessTokenRequestTest extends TestCase
         $this->request = new AccessTokenRequest();
     }
 
-    public function testSetCorpId()
+    public function testSetSetCredential()
     {
-        $this->request->setCorpId('jierg8ygwef');
+        $id = 'jierg8ygwef';
+        $secret = 'jkasdf8ayhsdf9ayf823hf23f';
+        $this->request->setCredential($id, $secret);
         $this->assertEquals('jierg8ygwef', $this->request->getCorpId());
     }
 
     public function testSetCorpSecret()
     {
-        $this->request->setCorpSecret('jkasdf8ayhsdf9ayf823hf23f');
+        $id = 'jierg8ygwef';
+        $secret = 'jkasdf8ayhsdf9ayf823hf23f';
+        $this->request->setCredential($id, $secret);
         $this->assertEquals('jkasdf8ayhsdf9ayf823hf23f', $this->request->getCorpSecret());
     }
 
     public function testGetUri()
     {
-        $corpId = 'jierg8ygwef';
-        $corpSecret = 'jkasdf8ayhsdf9ayf823hf23f';
-        $this->request->setCorpId($corpId);
-        $this->request->setCorpSecret($corpSecret);
-        $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$corpId}&corpsecret={$corpSecret}";
+        $id = 'jierg8ygwef';
+        $secret = 'jkasdf8ayhsdf9ayf823hf23f';
+        $this->request->setCredential($id, $secret);
+        $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$id}&corpsecret={$secret}";
         $this->assertEquals($url, (string)$this->request->getUri());
     }
 
     public function testRequestMethod()
     {
         $this->assertEquals('GET', $this->request->getRequest()->getMethod());
+    }
+
+    public function testSend()
+    {
+        /* @var AccessToken $accessToken */
+        $accessToken = $this->request->setCredential(CORP_ID, CORP_SECRET)->send();
+
+        $this->assertInstanceOf(AccessToken::class, $accessToken);
+
+        return $accessToken;
+    }
+
+    /**
+     * @param AccessToken $accessToken
+     * @depends testSend
+     */
+    public function testTokenIsString(AccessToken $accessToken)
+    {
+        $this->assertTrue(is_string($accessToken->getToken()), $accessToken->getToken());
+    }
+
+    /**
+     * @param AccessToken $accessToken
+     * @depends testSend
+     */
+    public function testTokenExpiresIsInt(AccessToken $accessToken)
+    {
+        $this->assertTrue(is_int($accessToken->getExpires()), $accessToken->getExpires());
     }
 }
