@@ -26,6 +26,14 @@ class AttributeArray implements \Countable, \JsonSerializable, \Serializable, \A
     public function __construct(array $attributes = [])
     {
         $this->container = $attributes;
+        $this->init();
+    }
+
+    /**
+     * init after construct
+     */
+    protected function init()
+    {
     }
 
     /**
