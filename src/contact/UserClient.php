@@ -33,7 +33,7 @@ class UserClient extends BaseClient
      */
     public function get(string $userId): array
     {
-        $request = (new GetUserRequest())->setUserId($userId);
+        $request = (new UserDetailRequest())->setUserId($userId);
         return $this->send($request);
     }
 

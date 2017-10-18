@@ -11,8 +11,20 @@ namespace cdcchen\wework\msg;
 
 use cdcchen\wework\base\BaseClient;
 
+/**
+ * Class MessageClient
+ * @package cdcchen\wework\msg
+ */
 class MessageClient extends BaseClient
 {
+    /**
+     * @param string $agentId
+     * @param string $content
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendText(
         string $agentId,
         string $content,
@@ -24,6 +36,14 @@ class MessageClient extends BaseClient
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
 
+    /**
+     * @param string $agentId
+     * @param string $mediaId
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendImage(
         string $agentId,
         string $mediaId,
@@ -35,6 +55,14 @@ class MessageClient extends BaseClient
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
 
+    /**
+     * @param string $agentId
+     * @param string $mediaId
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendVoice(
         string $agentId,
         string $mediaId,
@@ -46,6 +74,16 @@ class MessageClient extends BaseClient
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
 
+    /**
+     * @param string $agentId
+     * @param string $mediaId
+     * @param string|null $title
+     * @param string|null $description
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendVideo(
         string $agentId,
         string $mediaId,
@@ -59,6 +97,14 @@ class MessageClient extends BaseClient
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
 
+    /**
+     * @param string $agentId
+     * @param string $mediaId
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendFile(
         string $agentId,
         string $mediaId,
@@ -70,6 +116,14 @@ class MessageClient extends BaseClient
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
 
+    /**
+     * @param string $agentId
+     * @param TextCard $card
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendTextCard(
         string $agentId,
         TextCard $card,
@@ -81,6 +135,14 @@ class MessageClient extends BaseClient
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
 
+    /**
+     * @param string $agentId
+     * @param array $articles
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendNews(
         string $agentId,
         array $articles,
@@ -92,6 +154,14 @@ class MessageClient extends BaseClient
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
 
+    /**
+     * @param string $agentId
+     * @param array $articles
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendMPNews(
         string $agentId,
         array $articles,
@@ -103,6 +173,14 @@ class MessageClient extends BaseClient
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
 
+    /**
+     * @param string $agentId
+     * @param Message $message
+     * @param array|null $toUser
+     * @param array|null $toDepart
+     * @param array|null $toTag
+     * @return mixed
+     */
     public function sendMessage(
         string $agentId,
         Message $message,

@@ -56,7 +56,10 @@ class SendMessageRequest extends BaseRequest
         unset($data['errcode'], $data['errmsg']);
 
         return array_map(function ($value) {
-            return explode('|', $value);
+            if ($value && is_string($value)) {
+                return explode('|', $value);
+            }
+            return $value;
         }, $data);
     }
 
