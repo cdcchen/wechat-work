@@ -15,35 +15,35 @@ use Fig\Http\Message\RequestMethodInterface;
 
 /**
  * Class GetUserRequest
- * @package cdcchen\wework\contact
+ * @package cdcchen\wework\agent
  */
-class UserDetailRequest extends BaseRequest
+class GetMenuRequest extends BaseRequest
 {
     /**
      * @var string
      */
-    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/user/get';
+    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/menu/get';
     /**
      * @var string
      */
-    protected $method = RequestMethodInterface::METHOD_GET;
+    protected $method = RequestMethodInterface::METHOD_POST;
 
     /**
      * @param string $id
      * @return static
      */
-    public function setUserId(string $id): self
+    public function setAgentId(string $id): self
     {
-        $this->queryParams->set('userid', $id);
+        $this->queryParams->set('agentid', $id);
         return $this;
     }
 
     /**
      * @return null|string
      */
-    public function getUserId(): ?string
+    public function getAgentId(): ?string
     {
-        return $this->queryParams->get('userid');
+        return $this->queryParams->get('agentid');
     }
 
     /**
@@ -53,8 +53,6 @@ class UserDetailRequest extends BaseRequest
     protected function handleResponse(HttpResponse $response): array
     {
         $data = $response->getData();
-        unset($data['errcode'], $data['errmsg']);
-
-        return $data;
+        return $data['button'];
     }
 }

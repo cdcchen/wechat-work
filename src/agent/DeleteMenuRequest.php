@@ -6,7 +6,7 @@
  * Time: 17:41
  */
 
-namespace cdcchen\wework\agent;
+namespace cdcchen\wework\contact;
 
 
 use cdcchen\http\HttpResponse;
@@ -17,12 +17,12 @@ use Fig\Http\Message\RequestMethodInterface;
  * Class GetUserRequest
  * @package cdcchen\wework\agent
  */
-class UpdateAgentRequest extends BaseRequest
+class DeleteMenuRequest extends BaseRequest
 {
     /**
      * @var string
      */
-    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/agent/set';
+    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/menu/delete';
     /**
      * @var string
      */
@@ -48,13 +48,10 @@ class UpdateAgentRequest extends BaseRequest
 
     /**
      * @param HttpResponse $response
-     * @return array
+     * @return bool
      */
-    protected function handleResponse(HttpResponse $response): array
+    protected function handleResponse(HttpResponse $response): bool
     {
-        $data = $response->getData();
-        unset($data['errcode'], $data['errmsg']);
-
-        return $data;
+        return true;
     }
 }

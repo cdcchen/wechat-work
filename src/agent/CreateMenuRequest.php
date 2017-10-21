@@ -6,7 +6,7 @@
  * Time: 17:41
  */
 
-namespace cdcchen\wework\agent;
+namespace cdcchen\wework\contact;
 
 
 use cdcchen\http\HttpResponse;
@@ -17,12 +17,12 @@ use Fig\Http\Message\RequestMethodInterface;
  * Class GetUserRequest
  * @package cdcchen\wework\agent
  */
-class UpdateAgentRequest extends BaseRequest
+class CreateMenuRequest extends BaseRequest
 {
     /**
      * @var string
      */
-    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/agent/set';
+    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/menu/create';
     /**
      * @var string
      */
@@ -47,14 +47,29 @@ class UpdateAgentRequest extends BaseRequest
     }
 
     /**
-     * @param HttpResponse $response
-     * @return array
+     * @param array $buttons
+     * @return static
      */
-    protected function handleResponse(HttpResponse $response): array
+    public function setButtons(array $buttons): self
     {
-        $data = $response->getData();
-        unset($data['errcode'], $data['errmsg']);
+        $this->bodyParams->set('button', $buttons);
+        return $this;
+    }
 
-        return $data;
+    /**
+     * @return array|null
+     */
+    public function getButtons(): ?array
+    {
+        return $this->bodyParams->get('button');
+    }
+
+    /**
+     * @param HttpResponse $response
+     * @return bool
+     */
+    protected function handleResponse(HttpResponse $response): bool
+    {
+        return true;
     }
 }

@@ -6,7 +6,7 @@
  * Time: 17:41
  */
 
-namespace cdcchen\wework\agent;
+namespace cdcchen\wework\contact;
 
 
 use cdcchen\http\HttpResponse;
@@ -14,36 +14,36 @@ use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
 /**
- * Class GetUserRequest
- * @package cdcchen\wework\agent
+ * Class GetAsyncJobResultRequest.
+ * @package cdcchen\wework\contact
  */
-class UpdateAgentRequest extends BaseRequest
+class GetAsyncJobResultRequest extends BaseRequest
 {
     /**
      * @var string
      */
-    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/agent/set';
+    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/batch/getresult';
     /**
      * @var string
      */
-    protected $method = RequestMethodInterface::METHOD_POST;
+    protected $method = RequestMethodInterface::METHOD_GET;
 
     /**
      * @param string $id
      * @return static
      */
-    public function setAgentId(string $id): self
+    public function setJobId(string $id): self
     {
-        $this->queryParams->set('agentid', $id);
+        $this->queryParams->set('jobid', $id);
         return $this;
     }
 
     /**
      * @return null|string
      */
-    public function getAgentId(): ?string
+    public function getJobId(): ?string
     {
-        return $this->queryParams->get('agentid');
+        return $this->queryParams->get('jobid');
     }
 
     /**

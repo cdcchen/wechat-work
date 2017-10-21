@@ -14,8 +14,11 @@ use cdcchen\http\HttpClient;
 use cdcchen\http\HttpRequest;
 use cdcchen\http\HttpResponse;
 use cdcchen\http\RequestException;
+use cdcchen\psr7\HeaderCollection;
+use cdcchen\psr7\MultipartStream;
 use cdcchen\psr7\Uri;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -33,8 +36,19 @@ abstract class BaseRequest
      * @see RequestMethodInterface
      */
     protected $method;
+    /**
+     * @var string
+     */
     protected $format = Formatter::FORMAT_JSON;
+    /**
+     * @var StreamInterface
+     */
+    protected $body;
 
+    /**
+     * @var HeaderCollection
+     */
+    protected $headers;
     /**
      * @var AttributeArray
      */
@@ -44,11 +58,13 @@ abstract class BaseRequest
      */
     protected $bodyParams;
 
+
     /**
      * ApiRequest constructor.
      */
     public function __construct()
     {
+        $this->headers = new HeaderCollection();
         $this->queryParams = new AttributeArray();
         $this->bodyParams = new AttributeArray();
     }
@@ -71,6 +87,7 @@ abstract class BaseRequest
         return $this->queryParams->get('access_token');
     }
 
+
     /**
      * @return UriInterface
      */
@@ -84,7 +101,15 @@ abstract class BaseRequest
      */
     public function getRequest(): RequestInterface
     {
-        return new HttpRequest($this->method, $this->getUri(), null, $this->bodyParams->jsonEncode());
+        if ($this->body === null) {
+            $body = $this->bodyParams->isEmpty() ? null : $this->bodyParams->jsonEncode();
+        } else {
+            $body = $this->body;
+            if ($body instanceof MultipartStream) {
+                $this->headers->set('Content-Type', 'multipart/form-data; boundary=' . $body->getBoundary());
+            }
+        }
+        return new HttpRequest($this->method, $this->getUri(), $this->headers, $body);
     }
 
     /**
@@ -96,7 +121,10 @@ abstract class BaseRequest
     public function send()
     {
         $client = new HttpClient();
-        $response = $client->setFormat($this->format)->request($this->getRequest());
+        if ($this->format) {
+            $client->setFormat($this->format);
+        }
+        $response = $client->request($this->getRequest());
 
         if (!$response->isOK()) {
             throw new RequestException($response->getReasonPhrase(), $response->getStatusCode());

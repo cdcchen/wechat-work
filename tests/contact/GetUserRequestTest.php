@@ -11,19 +11,19 @@ namespace contact;
 
 use cdcchen\wework\AccessTokenRequest;
 use cdcchen\wework\base\AccessToken;
-use cdcchen\wework\contact\UserDetailRequest;
+use cdcchen\wework\contact\GetUserRequest;
 use PHPUnit\Framework\TestCase;
 
 class GetUserRequestTest extends TestCase
 {
     /**
-     * @var UserDetailRequest
+     * @var GetUserRequest
      */
     protected $request;
 
     public function setUp()
     {
-        $this->request = new UserDetailRequest();
+        $this->request = new GetUserRequest();
     }
 
     public function testSetUserId()

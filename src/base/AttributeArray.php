@@ -96,6 +96,14 @@ class AttributeArray implements \Countable, \JsonSerializable, \Serializable, \A
     }
 
     /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return empty($this->container);
+    }
+
+    /**
      * @return array
      */
     public function toArray(): array

@@ -11,9 +11,9 @@ namespace cdcchen\wework\base;
 
 /**
  * Class CallbackCredential
- * @package cdcchen\wework\auth
+ * @package cdcchen\wework\base
  */
-class CallbackCredential
+class CallbackCredential implements \JsonSerializable, \Serializable
 {
     /**
      * @var string
@@ -95,5 +95,32 @@ class CallbackCredential
         $str = implode('', $params);
 
         return sha1($str);
+    }
+
+    /**
+     * @return string
+     */
+    public function serialize()
+    {
+        return serialize($this->toArray());
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+        $this->url = $data['url'] ?? null;
+        $this->token = $data['token'] ?? null;
+        $this->encodingAesKey = $data['encoding_aes_key'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function jsonSerialize()
+    {
+        return $this->token;
     }
 }
