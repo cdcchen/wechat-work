@@ -47,6 +47,10 @@ class CreateUserRequest extends BaseRequest
         return $this->bodyParams;
     }
 
+    /**
+     * @param HttpResponse $response
+     * @return bool
+     */
     protected function handleResponse(HttpResponse $response): bool
     {
         return true;

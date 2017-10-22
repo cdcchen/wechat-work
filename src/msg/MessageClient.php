@@ -23,7 +23,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendText(
         string $agentId,
@@ -31,7 +31,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message = (new TextMessage())->setContent($content);
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
@@ -42,7 +42,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendImage(
         string $agentId,
@@ -50,7 +50,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message = (new ImageMessage())->setMediaId($mediaId);
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
@@ -61,7 +61,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendVoice(
         string $agentId,
@@ -69,7 +69,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message = (new VoiceMessage())->setMediaId($mediaId);
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
@@ -82,7 +82,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendVideo(
         string $agentId,
@@ -92,7 +92,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message = (new VideoMessage())->setVideo($mediaId, $title, $description);
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
@@ -103,7 +103,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendFile(
         string $agentId,
@@ -111,7 +111,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message = (new FileMessage())->setMediaId($mediaId);
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
@@ -122,7 +122,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendTextCard(
         string $agentId,
@@ -130,7 +130,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message = (new TextCardMessage())->setCard($card);
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
@@ -141,7 +141,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendNews(
         string $agentId,
@@ -149,7 +149,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message = (new NewsMessage())->setArticles($articles);
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
@@ -160,7 +160,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendMPNews(
         string $agentId,
@@ -168,7 +168,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message = (new MPNewsMessage())->setArticles($articles);
         return $this->sendMessage($agentId, $message, $toUser, $toDepart, $toTag);
     }
@@ -179,7 +179,7 @@ class MessageClient extends BaseClient
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
-     * @return mixed
+     * @return array
      */
     public function sendMessage(
         string $agentId,
@@ -187,7 +187,7 @@ class MessageClient extends BaseClient
         array $toUser = null,
         array $toDepart = null,
         array $toTag = null
-    ) {
+    ): array {
         $message->setAgentId($agentId);
         if ($toUser !== null) {
             $message->setToUser($toUser);

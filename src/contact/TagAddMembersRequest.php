@@ -14,15 +14,15 @@ use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
 /**
- * Class TagDeleteUsersRequest
+ * Class TagAddMembersRequest
  * @package cdcchen\wework\msg
  */
-class TagDeleteUsersRequest extends BaseRequest
+class TagAddMembersRequest extends BaseRequest
 {
     /**
      * @var string
      */
-    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/tag/deltagusers';
+    protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/tag/addtagusers';
     /**
      * @var string
      */

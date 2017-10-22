@@ -12,6 +12,7 @@ namespace cdcchen\wework\media;
 use cdcchen\http\HttpResponse;
 use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * Class GetMediaRequest
@@ -23,12 +24,12 @@ class GetMediaRequest extends BaseRequest
     protected $method = RequestMethodInterface::METHOD_GET;
 
     /**
-     * @param string $type
+     * @param string $mediaId
      * @return static
      */
-    public function setMediaId(string $type): self
+    public function setMediaId(string $mediaId): self
     {
-        $this->queryParams->set('media_id', $type);
+        $this->queryParams->set('media_id', $mediaId);
         return $this;
     }
 
@@ -42,11 +43,11 @@ class GetMediaRequest extends BaseRequest
 
     /**
      * @param HttpResponse $response
-     * @return string
+     * @return StreamInterface
      */
-    protected function handleResponse(HttpResponse $response): string
+    protected function handleResponse(HttpResponse $response): StreamInterface
     {
-        return (string)$response->getBody();
+        return $response->getBody();
     }
 
 }

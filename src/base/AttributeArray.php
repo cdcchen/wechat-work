@@ -108,7 +108,22 @@ class AttributeArray implements \Countable, \JsonSerializable, \Serializable, \A
      */
     public function toArray(): array
     {
-        return $this->container;
+        return static::_toArray($this->container);
+    }
+
+    private static function _toArray($data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = static::_toArray($value);
+            } elseif (method_exists($value, 'toArray')) {
+                $data[$key] = $value->toArray();
+            } else {
+                $data[$key] = $value;
+            }
+        }
+
+        return $data;
     }
 
     /**

@@ -13,9 +13,19 @@ use cdcchen\http\HttpResponse;
 use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
-class TagUserListRequest extends BaseRequest
+/**
+ * Class GetTagMembersRequest
+ * @package cdcchen\wework\contact
+ */
+class GetTagMembersRequest extends BaseRequest
 {
+    /**
+     * @var string
+     */
     protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/tag/get';
+    /**
+     * @var string
+     */
     protected $method = RequestMethodInterface::METHOD_GET;
 
     /**

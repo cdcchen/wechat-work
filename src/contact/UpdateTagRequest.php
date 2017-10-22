@@ -13,9 +13,19 @@ use cdcchen\http\HttpResponse;
 use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
+/**
+ * Class UpdateTagRequest
+ * @package cdcchen\wework\contact
+ */
 class UpdateTagRequest extends BaseRequest
 {
+    /**
+     * @var string
+     */
     protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/tag/update';
+    /**
+     * @var string
+     */
     protected $method = RequestMethodInterface::METHOD_POST;
 
     /**

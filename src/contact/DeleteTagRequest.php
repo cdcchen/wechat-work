@@ -13,9 +13,19 @@ use cdcchen\http\HttpResponse;
 use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
+/**
+ * Class DeleteTagRequest
+ * @package cdcchen\wework\contact
+ */
 class DeleteTagRequest extends BaseRequest
 {
+    /**
+     * @var string
+     */
     protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/tag/delete';
+    /**
+     * @var string
+     */
     protected $method = RequestMethodInterface::METHOD_POST;
 
     /**

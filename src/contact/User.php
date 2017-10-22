@@ -11,6 +11,10 @@ namespace cdcchen\wework\contact;
 
 use cdcchen\wework\base\AttributeArray;
 
+/**
+ * Class User
+ * @package cdcchen\wework\contact
+ */
 class User extends AttributeArray
 {
     /**

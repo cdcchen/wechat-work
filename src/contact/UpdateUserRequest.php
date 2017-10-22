@@ -9,7 +9,14 @@
 namespace cdcchen\wework\contact;
 
 
+/**
+ * Class UpdateUserRequest
+ * @package cdcchen\wework\contact
+ */
 class UpdateUserRequest extends CreateUserRequest
 {
+    /**
+     * @var string
+     */
     protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/user/update';
 }
