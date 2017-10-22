@@ -28,15 +28,15 @@ class PrpCrypt
     /**
      * @var string
      */
-    private $_key;
+    private $encodingAesKey;
 
     /**
      * PrpCrypt constructor.
-     * @param string $k
+     * @param string $key
      */
-    public function __construct($k)
+    public function __construct($key)
     {
-        $this->_key = base64_decode($k . '=');
+        $this->encodingAesKey = base64_decode($key . '=');
     }
 
     /**
@@ -57,7 +57,7 @@ class PrpCrypt
         $text = PKCS7Encoder::encode($text);
 
         $iv = $this->getInitVector();
-        $encrypted = openssl_encrypt($text, self::CIPHER_METHOD, $this->_key, 0, $iv);
+        $encrypted = openssl_encrypt($text, self::CIPHER_METHOD, $this->encodingAesKey, 0, $iv);
 
         // 使用BASE64对加密后的字符串进行编码
         return base64_encode($encrypted);
@@ -67,15 +67,14 @@ class PrpCrypt
      * 对密文进行解密
      *
      * @param string $encrypted 需要解密的密文
-     * @param string $corpId
      * @return string 解密得到的明文
      */
-    public function decrypt($encrypted, $corpId): string
+    public function decrypt($encrypted): string
     {
         //使用BASE64对需要解密的字符串进行解码
         $cipherText = base64_decode($encrypted);
         $iv = $this->getInitVector();
-        $decrypted = openssl_decrypt($cipherText, self::CIPHER_METHOD, $this->_key, 0, $iv);
+        $decrypted = openssl_decrypt($cipherText, self::CIPHER_METHOD, $this->encodingAesKey, 0, $iv);
 
         //去除补位字符
         $result = PKCS7Encoder::decode($decrypted);
@@ -114,6 +113,6 @@ class PrpCrypt
      */
     private function getInitVector(): string
     {
-        return substr($this->_key, 0, 16);
+        return substr($this->encodingAesKey, 0, 16);
     }
 }
