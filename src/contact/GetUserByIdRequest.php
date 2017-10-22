@@ -14,10 +14,10 @@ use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
 /**
- * Class GetUserRequest
+ * Class GetUserByIdRequest
  * @package cdcchen\wework\contact
  */
-class GetUserRequest extends BaseRequest
+class GetUserByIdRequest extends BaseRequest
 {
     /**
      * @var string

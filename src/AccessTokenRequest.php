@@ -30,14 +30,14 @@ class AccessTokenRequest extends BaseRequest
     protected $method = RequestMethodInterface::METHOD_GET;
 
     /**
-     * @param string $id
-     * @param string $secret
+     * @param string $corpId
+     * @param string $corpSecret
      * @return AccessTokenRequest
      */
-    public function setCredential(string $id, string $secret): self
+    public function setCredential(string $corpId, string $corpSecret): self
     {
-        $this->queryParams->set('corpid', $id);
-        $this->queryParams->set('corpsecret', $secret);
+        $this->queryParams->set('corpid', $corpId);
+        $this->queryParams->set('corpsecret', $corpSecret);
         return $this;
     }
 

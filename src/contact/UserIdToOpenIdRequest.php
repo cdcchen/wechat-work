@@ -14,10 +14,10 @@ use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
 /**
- * Class ConvertToOpenIdRequest
+ * Class UserIdToOpenIdRequest
  * @package cdcchen\wework\contact
  */
-class ConvertToOpenIdRequest extends BaseRequest
+class UserIdToOpenIdRequest extends BaseRequest
 {
     /**
      * @var string
@@ -30,11 +30,11 @@ class ConvertToOpenIdRequest extends BaseRequest
 
     /**
      * @param string $id
-     * @return ConvertToOpenIdRequest
+     * @return static
      */
     public function setUserId(string $id): self
     {
-        $this->queryParams->set('userid', $id);
+        $this->bodyParams->set('userid', $id);
         return $this;
     }
 
@@ -43,16 +43,16 @@ class ConvertToOpenIdRequest extends BaseRequest
      */
     public function getUserId(): ?string
     {
-        return $this->queryParams->get('userid');
+        return $this->bodyParams->get('userid');
     }
 
     /**
      * @param string $id
-     * @return ConvertToOpenIdRequest
+     * @return static
      */
     public function setAgentId(string $id): self
     {
-        $this->queryParams->set('agentid', $id);
+        $this->bodyParams->set('agentid', $id);
         return $this;
     }
 
@@ -61,7 +61,7 @@ class ConvertToOpenIdRequest extends BaseRequest
      */
     public function getAgentId(): ?string
     {
-        return $this->queryParams->get('agentid');
+        return $this->bodyParams->get('agentid');
     }
 
     /**

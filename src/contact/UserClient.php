@@ -31,9 +31,29 @@ class UserClient extends BaseClient
      * @param string $userId
      * @return array
      */
-    public function get(string $userId): array
+    public function getById(string $userId): array
     {
-        $request = (new GetUserRequest())->setUserId($userId);
+        $request = (new GetUserByIdRequest())->setUserId($userId);
+        return $this->send($request);
+    }
+
+    /**
+     * @param string $ticket
+     * @return array
+     */
+    public function getByTicket(string $ticket): array
+    {
+        $request = (new GetUserByTicketRequest())->setUserTicket($ticket);
+        return $this->send($request);
+    }
+
+    /**
+     * @param string $code
+     * @return array
+     */
+    public function getInfo(string $code): array
+    {
+        $request = (new GetUserInfoRequest())->setCode($code);
         return $this->send($request);
     }
 
@@ -98,7 +118,7 @@ class UserClient extends BaseClient
      */
     public function getOpenId(string $userId, string $agentId): array
     {
-        $request = new ConvertToOpenIdRequest();
+        $request = new UserIdToOpenIdRequest();
         $request->setUserId($userId)->setAgentId($agentId);
         return $this->send($request);
     }
