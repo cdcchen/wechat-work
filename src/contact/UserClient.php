@@ -113,10 +113,10 @@ class UserClient extends BaseClient
 
     /**
      * @param string $userId
-     * @param string $agentId
+     * @param int $agentId
      * @return array
      */
-    public function getOpenId(string $userId, string $agentId): array
+    public function getOpenId(string $userId, int $agentId): array
     {
         $request = new UserIdToOpenIdRequest();
         $request->setUserId($userId)->setAgentId($agentId);

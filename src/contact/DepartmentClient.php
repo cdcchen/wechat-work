@@ -35,7 +35,7 @@ class DepartmentClient extends BaseClient
             $request->setId($id);
         }
 
-        return $request->send();
+        return $this->send($request);
     }
 
     /**
@@ -58,7 +58,7 @@ class DepartmentClient extends BaseClient
             $request->setOrder($order);
         }
 
-        return $request->send();
+        return $this->send($request);
     }
 
     /**
@@ -67,7 +67,7 @@ class DepartmentClient extends BaseClient
      */
     public function delete(int $id): bool
     {
-        return (new DeleteDepartmentRequest())->setId($id)->send();
+        return $this->send(new DeleteDepartmentRequest())->setId($id);
     }
 
     /**
@@ -76,6 +76,6 @@ class DepartmentClient extends BaseClient
      */
     public function getList(int $id): array
     {
-        return (new DepartmentListRequest())->setId($id)->send();
+        return $this->send((new DepartmentListRequest())->setId($id));
     }
 }

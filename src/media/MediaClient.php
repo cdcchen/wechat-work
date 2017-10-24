@@ -24,7 +24,7 @@ class MediaClient extends BaseClient
      */
     public function get(string $mediaId): StreamInterface
     {
-        return (new GetMediaRequest())->setMediaId($mediaId)->send();
+        return $this->send((new GetMediaRequest())->setMediaId($mediaId));
     }
 
     /**
@@ -35,7 +35,7 @@ class MediaClient extends BaseClient
     public function upload(string $type, string $filename): array
     {
         $request = (new UploadMediaRequest())->setType($type)->setMedia($filename);
-        return $request->send();
+        return $this->send($request);
     }
 
     /**

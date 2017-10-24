@@ -6,7 +6,7 @@
  * Time: 17:41
  */
 
-namespace cdcchen\wework\contact;
+namespace cdcchen\wework\agent;
 
 
 use cdcchen\http\HttpResponse;

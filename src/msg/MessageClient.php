@@ -18,7 +18,7 @@ use cdcchen\wework\base\BaseClient;
 class MessageClient extends BaseClient
 {
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param string $content
      * @param array|null $toUser
      * @param array|null $toDepart
@@ -26,7 +26,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendText(
-        string $agentId,
+        int $agentId,
         string $content,
         array $toUser = null,
         array $toDepart = null,
@@ -37,7 +37,7 @@ class MessageClient extends BaseClient
     }
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param string $mediaId
      * @param array|null $toUser
      * @param array|null $toDepart
@@ -45,7 +45,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendImage(
-        string $agentId,
+        int $agentId,
         string $mediaId,
         array $toUser = null,
         array $toDepart = null,
@@ -56,7 +56,7 @@ class MessageClient extends BaseClient
     }
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param string $mediaId
      * @param array|null $toUser
      * @param array|null $toDepart
@@ -64,7 +64,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendVoice(
-        string $agentId,
+        int $agentId,
         string $mediaId,
         array $toUser = null,
         array $toDepart = null,
@@ -75,7 +75,7 @@ class MessageClient extends BaseClient
     }
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param string $mediaId
      * @param string|null $title
      * @param string|null $description
@@ -85,7 +85,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendVideo(
-        string $agentId,
+        int $agentId,
         string $mediaId,
         string $title = null,
         string $description = null,
@@ -98,7 +98,7 @@ class MessageClient extends BaseClient
     }
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param string $mediaId
      * @param array|null $toUser
      * @param array|null $toDepart
@@ -106,7 +106,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendFile(
-        string $agentId,
+        int $agentId,
         string $mediaId,
         array $toUser = null,
         array $toDepart = null,
@@ -117,7 +117,7 @@ class MessageClient extends BaseClient
     }
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param TextCard $card
      * @param array|null $toUser
      * @param array|null $toDepart
@@ -125,7 +125,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendTextCard(
-        string $agentId,
+        int $agentId,
         TextCard $card,
         array $toUser = null,
         array $toDepart = null,
@@ -136,7 +136,7 @@ class MessageClient extends BaseClient
     }
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param array $articles
      * @param array|null $toUser
      * @param array|null $toDepart
@@ -144,7 +144,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendNews(
-        string $agentId,
+        int $agentId,
         array $articles,
         array $toUser = null,
         array $toDepart = null,
@@ -155,7 +155,7 @@ class MessageClient extends BaseClient
     }
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param array $articles
      * @param array|null $toUser
      * @param array|null $toDepart
@@ -163,7 +163,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendMPNews(
-        string $agentId,
+        int $agentId,
         array $articles,
         array $toUser = null,
         array $toDepart = null,
@@ -174,7 +174,7 @@ class MessageClient extends BaseClient
     }
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @param Message $message
      * @param array|null $toUser
      * @param array|null $toDepart
@@ -182,7 +182,7 @@ class MessageClient extends BaseClient
      * @return array
      */
     public function sendMessage(
-        string $agentId,
+        int $agentId,
         Message $message,
         array $toUser = null,
         array $toDepart = null,

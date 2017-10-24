@@ -31,7 +31,7 @@ class TagClient extends BaseClient
             $request->setId($id);
         }
 
-        return $request->send();
+        return $this->send($request);
     }
 
     /**
@@ -41,7 +41,7 @@ class TagClient extends BaseClient
      */
     public function update(int $id, string $name): bool
     {
-        return (new UpdateTagRequest())->setId($id)->setName($name)->send();
+        return $this->send((new UpdateTagRequest())->setId($id)->setName($name));
     }
 
     /**
@@ -50,7 +50,7 @@ class TagClient extends BaseClient
      */
     public function delete(int $id): bool
     {
-        return (new DeleteTagRequest())->setId($id)->send();
+        return $this->send((new DeleteTagRequest())->setId($id));
     }
 
     /**
@@ -59,7 +59,7 @@ class TagClient extends BaseClient
      */
     public function getMembers(int $id): array
     {
-        return (new GetTagMembersRequest())->setId($id)->send();
+        return $this->send((new GetTagMembersRequest())->setId($id));
     }
 
     /**
@@ -70,10 +70,10 @@ class TagClient extends BaseClient
      */
     public function addMembers(int $id, array $userIds, array $partyIds): array
     {
-        return (new TagAddMembersRequest())->setTagId($id)
-                                           ->setUserList($userIds)
-                                           ->setPartyList($partyIds)
-                                           ->send();
+        $request = (new TagAddMembersRequest())->setTagId($id)
+                                               ->setUserList($userIds)
+                                               ->setPartyList($partyIds);
+        return $this->send($request);
     }
 
     /**
@@ -84,10 +84,10 @@ class TagClient extends BaseClient
      */
     public function deleteMembers(int $id, array $userIds, array $partyIds): array
     {
-        return (new TagDeleteMembersRequest())->setTagId($id)
-                                              ->setUserList($userIds)
-                                              ->setPartyList($partyIds)
-                                              ->send();
+        $request = (new TagDeleteMembersRequest())->setTagId($id)
+                                                  ->setUserList($userIds)
+                                                  ->setPartyList($partyIds);
+        return $this->send($request);
     }
 
     /**
@@ -95,6 +95,6 @@ class TagClient extends BaseClient
      */
     public function getList(): array
     {
-        return (new TagListRequest())->send();
+        return $this->send((new TagListRequest()));
     }
 }

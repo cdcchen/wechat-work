@@ -31,7 +31,7 @@ class AppClient
     /**
      * @param string $corpId
      * @param string $redirectUrl
-     * @param string $agentId
+     * @param int $agentId
      * @param string $scope See AuthorizeScope
      * @param string|null $state
      * @return string
@@ -39,7 +39,7 @@ class AppClient
     public static function authorizeUrl(
         string $corpId,
         string $redirectUrl,
-        string $agentId,
+        int $agentId,
         string $scope,
         string $state = null
     ): string {
@@ -55,14 +55,14 @@ class AppClient
     /**
      * @param string $corpId
      * @param string $redirectUrl
-     * @param string $agentId
+     * @param int $agentId
      * @param string|null $state
      * @return string
      */
     public static function ssoUrl(
         string $corpId,
         string $redirectUrl,
-        string $agentId,
+        int $agentId,
         string $state = null
     ): string {
         $url = "https://open.work.weixin.qq.com/wwopen/sso/qrConnect?appid={$corpId}&agentid={$agentId}&redirect_uri={$redirectUrl}";

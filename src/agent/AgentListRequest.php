@@ -13,9 +13,19 @@ use cdcchen\http\HttpResponse;
 use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
-class AgentAgentRequest extends BaseRequest
+/**
+ * Class AgentListRequest
+ * @package cdcchen\wework\agent
+ */
+class AgentListRequest extends BaseRequest
 {
+    /**
+     * @var string
+     */
     protected $apiUri = 'https://qyapi.weixin.qq.com/cgi-bin/agent/list';
+    /**
+     * @var string
+     */
     protected $method = RequestMethodInterface::METHOD_GET;
 
     /**

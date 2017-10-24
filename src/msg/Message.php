@@ -23,10 +23,10 @@ class Message extends AttributeArray
     const TYPE_MPNEWS    = 'mpnews';
 
     /**
-     * @param string $agentId
+     * @param int $agentId
      * @return static
      */
-    public function setAgentId(string $agentId): self
+    public function setAgentId(int $agentId): self
     {
         $this->set('agentid', $agentId);
         return $this;

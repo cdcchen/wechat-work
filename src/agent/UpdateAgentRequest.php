@@ -10,6 +10,7 @@ namespace cdcchen\wework\agent;
 
 
 use cdcchen\http\HttpResponse;
+use cdcchen\wework\base\AttributeArray;
 use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
@@ -29,32 +30,32 @@ class UpdateAgentRequest extends BaseRequest
     protected $method = RequestMethodInterface::METHOD_POST;
 
     /**
-     * @param string $id
-     * @return static
-     */
-    public function setAgentId(string $id): self
-    {
-        $this->queryParams->set('agentid', $id);
-        return $this;
-    }
-
-    /**
      * @return null|string
      */
     public function getAgentId(): ?string
     {
-        return $this->queryParams->get('agentid');
+        return $this->bodyParams->get('agentid');
+    }
+
+    /**
+     * @param int $agentId
+     * @param array $attributes
+     * @return self
+     */
+    public function setAttributes(int $agentId, array $attributes)
+    {
+        $attributes['agentid'] = $agentId;
+        $this->bodyParams = new AttributeArray($attributes);
+
+        return $this;
     }
 
     /**
      * @param HttpResponse $response
-     * @return array
+     * @return bool
      */
-    protected function handleResponse(HttpResponse $response): array
+    protected function handleResponse(HttpResponse $response): bool
     {
-        $data = $response->getData();
-        unset($data['errcode'], $data['errmsg']);
-
-        return $data;
+        return true;
     }
 }

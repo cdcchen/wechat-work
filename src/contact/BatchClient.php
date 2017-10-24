@@ -28,7 +28,7 @@ class BatchClient extends BaseClient
      */
     public function getJobResult(string $jobId): array
     {
-        return (new GetAsyncJobResultRequest())->setJobId($jobId)->send();
+        return $this->send((new GetAsyncJobResultRequest())->setJobId($jobId));
     }
 
     /**
@@ -38,7 +38,7 @@ class BatchClient extends BaseClient
      */
     public function syncUser(string $mediaId, CallbackCredential $credential): string
     {
-        return (new SyncUserRequest())->setMediaId($mediaId)->setCallback($credential)->send();
+        return $this->send((new SyncUserRequest())->setMediaId($mediaId)->setCallback($credential));
     }
 
     /**
@@ -48,7 +48,7 @@ class BatchClient extends BaseClient
      */
     public function replaceUser(string $mediaId, CallbackCredential $credential): string
     {
-        return (new ReplaceUserRequest())->setMediaId($mediaId)->setCallback($credential)->send();
+        return $this->send((new ReplaceUserRequest())->setMediaId($mediaId)->setCallback($credential));
     }
 
     /**
@@ -58,6 +58,6 @@ class BatchClient extends BaseClient
      */
     public function replaceDepartment(string $mediaId, CallbackCredential $credential): string
     {
-        return (new ReplaceDepartmentRequest())->setMediaId($mediaId)->setCallback($credential)->send();
+        return $this->send((new ReplaceDepartmentRequest())->setMediaId($mediaId)->setCallback($credential));
     }
 }

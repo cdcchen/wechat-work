@@ -113,6 +113,4 @@ class AccessToken implements \JsonSerializable, \Serializable
             'createdTime' => $this->createdTime,
         ];
     }
-
-
 }
