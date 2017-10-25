@@ -22,6 +22,22 @@ class MenuItemTest extends TestCase
         return $item;
     }
 
+    public function testInstanceWithAttributes()
+    {
+        $attributes = [
+            'type' => MenuItem::TYPE_VIEW,
+            'name' => '菜单111',
+        ];
+        $item = new MenuItem($attributes);
+        $actual = [
+            'type' => $item->getType(),
+            'name' => $item->getName(),
+        ];
+        $this->assertEquals($attributes, $actual);
+
+        return $item;
+    }
+
     /**
      * @param MenuItem $item
      * @depends testInstance

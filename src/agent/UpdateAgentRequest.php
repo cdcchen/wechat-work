@@ -30,14 +30,6 @@ class UpdateAgentRequest extends BaseRequest
     protected $method = RequestMethodInterface::METHOD_POST;
 
     /**
-     * @return null|string
-     */
-    public function getAgentId(): ?string
-    {
-        return $this->bodyParams->get('agentid');
-    }
-
-    /**
      * @param int $agentId
      * @param array $attributes
      * @return self
@@ -48,6 +40,22 @@ class UpdateAgentRequest extends BaseRequest
         $this->bodyParams = new AttributeArray($attributes);
 
         return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getAgentId(): ?string
+    {
+        return $this->bodyParams->get('agentid');
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes(): array
+    {
+        return $this->bodyParams->toArray();
     }
 
     /**

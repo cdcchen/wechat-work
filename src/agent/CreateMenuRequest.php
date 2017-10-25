@@ -29,12 +29,14 @@ class CreateMenuRequest extends BaseRequest
     protected $method = RequestMethodInterface::METHOD_POST;
 
     /**
-     * @param string $id
+     * @param int $agentId
+     * @param array $buttons
      * @return static
      */
-    public function setAgentId(string $id): self
+    public function setButtons(int $agentId, array $buttons): self
     {
-        $this->queryParams->set('agentid', $id);
+        $this->queryParams->set('agentid', $agentId);
+        $this->bodyParams->set('button', $buttons);
         return $this;
     }
 
@@ -44,16 +46,6 @@ class CreateMenuRequest extends BaseRequest
     public function getAgentId(): ?string
     {
         return $this->queryParams->get('agentid');
-    }
-
-    /**
-     * @param array $buttons
-     * @return static
-     */
-    public function setButtons(array $buttons): self
-    {
-        $this->bodyParams->set('button', $buttons);
-        return $this;
     }
 
     /**

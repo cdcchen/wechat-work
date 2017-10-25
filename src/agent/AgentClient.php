@@ -41,7 +41,7 @@ class AgentClient extends BaseClient
      */
     public function createMenu(int $agentId, array $menuItems): bool
     {
-        $request = (new CreateMenuRequest())->setAgentId($agentId)->setButtons($menuItems);
+        $request = (new CreateMenuRequest())->setButtons($agentId, $menuItems);
         return $this->send($request);
     }
 

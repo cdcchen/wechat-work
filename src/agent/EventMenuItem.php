@@ -16,19 +16,19 @@ namespace cdcchen\wework\agent;
 class EventMenuItem extends MenuItem
 {
     /**
-     * @param string $url
+     * @param string $key
      * @return EventMenuItem
      */
-    public function setKey(string $url): self
+    public function setKey(string $key): self
     {
-        $this->set('key', $url);
+        $this->set('key', $key);
         return $this;
     }
 
     /**
      * @return null|string
      */
-    public function getUrl(): ?string
+    public function getKey(): ?string
     {
         return $this->get('key');
     }

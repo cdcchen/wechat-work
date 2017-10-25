@@ -26,7 +26,7 @@ class GetMenuRequest extends BaseRequest
     /**
      * @var string
      */
-    protected $method = RequestMethodInterface::METHOD_POST;
+    protected $method = RequestMethodInterface::METHOD_GET;
 
     /**
      * @param string $id

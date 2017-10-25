@@ -15,6 +15,12 @@ namespace cdcchen\wework\agent;
  */
 class ViewMenuItem extends MenuItem
 {
+    public function init()
+    {
+        parent::init();
+        $this->setType(self::TYPE_VIEW);
+    }
+    
     /**
      * @param string $url
      * @return ViewMenuItem
