@@ -38,7 +38,7 @@ class UploadMediaRequestTest extends TestCase
 
     public function testUploadMediaFile()
     {
-        $filename = __DIR__ . '/up_file.txt';
+        $filename = __DIR__ . '/file.txt';
         $this->request->setType(MediaType::FILE)
                       ->setMedia($filename);
         $data = $this->request->send();
