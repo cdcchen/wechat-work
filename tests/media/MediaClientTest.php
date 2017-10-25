@@ -53,7 +53,7 @@ class MediaClientTest extends TestCase
 
     public function testUploadVoice()
     {
-        $result = $this->client->uploadVoice(__DIR__ . '/voice.mp3');
+        $result = $this->client->uploadVoice(__DIR__ . '/voice.amr');
         $this->assertArrayHasKey('media_id', $result);
         sleep(1);
     }
