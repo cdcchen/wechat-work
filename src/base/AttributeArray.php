@@ -111,7 +111,11 @@ class AttributeArray implements \Countable, \JsonSerializable, \Serializable, \A
         return static::_toArray($this->container);
     }
 
-    private static function _toArray($data)
+    /**
+     * @param array $data
+     * @return array
+     */
+    private static function _toArray(array $data)
     {
         foreach ($data as $key => $value) {
             if (is_array($value)) {
@@ -160,9 +164,9 @@ class AttributeArray implements \Countable, \JsonSerializable, \Serializable, \A
     {
         if (is_string($offset)) {
             $this->container[$offset] = $value;
+        } else {
+            throw new \InvalidArgumentException('offset must be a string.');
         }
-
-        throw new \InvalidArgumentException('offset must be a string.');
     }
 
     /**
@@ -172,9 +176,9 @@ class AttributeArray implements \Countable, \JsonSerializable, \Serializable, \A
     {
         if (is_string($offset)) {
             unset($this->container[$offset]);
+        } else {
+            throw new \InvalidArgumentException('offset must be a string.');
         }
-
-        throw new \InvalidArgumentException('offset must be a string.');
     }
 
     /**

@@ -1,10 +1,11 @@
 <?php
-namespace cdcchen\wechat\base;
+
+namespace cdcchen\wework\base;
 
 
 /**
  * Class ShaHmac256Signer
- * @package cdcchen\wechat\base
+ * @package cdcchen\wework\base
  */
 class ShaHmac256Signer implements SignerInterface
 {

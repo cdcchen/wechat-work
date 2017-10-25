@@ -117,10 +117,10 @@ class CallbackCredential implements \JsonSerializable, \Serializable
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function jsonSerialize()
     {
-        return $this->token;
+        return $this->toArray();
     }
 }

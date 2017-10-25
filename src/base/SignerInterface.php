@@ -1,10 +1,10 @@
 <?php
-namespace cdcchen\wechat\base;
+namespace cdcchen\wework\base;
 
 
 /**
  * Interface SignerInterface
- * @package cdcchen\wechat\base
+ * @package cdcchen\wework\base
  */
 interface SignerInterface
 {

@@ -56,7 +56,7 @@ class AppCredential implements \Serializable, \JsonSerializable
      */
     public function toArray()
     {
-        return ['id' => $this->id, 'secret' => $this->getSecret()];
+        return ['id' => $this->id, 'secret' => $this->secret];
     }
 
     /**
