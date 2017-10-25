@@ -36,8 +36,12 @@ class SendMessageRequestTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        /** @var AccessToken $token */
-        $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        if (SKIP_REAL_REQUEST) {
+            $token = new AccessToken(__METHOD__, 7200);
+        } else {
+            /** @var AccessToken $token */
+            $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        }
         static::$accessToken = $token->getToken();
     }
 
@@ -48,7 +52,10 @@ class SendMessageRequestTest extends TestCase
 
     public function testSendTextMessage()
     {
-//        $this->markTestSkipped();
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $message = (new TextMessage())->setToUser([USER_ID])
                                       ->setAgentId(AGENT_ID)
                                       ->setContent('测试消息');
@@ -58,7 +65,10 @@ class SendMessageRequestTest extends TestCase
 
     public function testSendImageMessage()
     {
-//        $this->markTestSkipped();
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $message = (new ImageMessage())->setToUser([USER_ID])
                                        ->setAgentId(AGENT_ID)
                                        ->setMediaId('27r7HtwGGexjynp4x5uG2wpgVCx2cAfz3NXNBPIcnhGs');
@@ -68,7 +78,10 @@ class SendMessageRequestTest extends TestCase
 
     public function testSendVoiceMessage()
     {
-//        $this->markTestSkipped();
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $message = (new VoiceMessage())->setToUser([USER_ID])
                                        ->setAgentId(AGENT_ID)
                                        ->setMediaId('2gFNOQkEGGLyx76Cnq2Y98BVGJ3pQ9esZXPUTWKSYIdI');
@@ -78,7 +91,10 @@ class SendMessageRequestTest extends TestCase
 
     public function testSendVideoMessage()
     {
-//        $this->markTestSkipped();
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $message = (new VideoMessage())->setToUser([USER_ID])
                                        ->setAgentId(AGENT_ID)
                                        ->setVideo(
@@ -92,7 +108,10 @@ class SendMessageRequestTest extends TestCase
 
     public function testSendFileMessage()
     {
-//        $this->markTestSkipped();
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $message = (new FileMessage())->setToUser([USER_ID])
                                       ->setAgentId(AGENT_ID)
                                       ->setMediaId('26JzmBovgqgEIHEuy3DH49K9zvVy_5NdTOK3OXnRaUvA0z8VuMyhflp5eO7gM_sEc');
@@ -103,7 +122,10 @@ class SendMessageRequestTest extends TestCase
 
     public function testSendTextCardMessage()
     {
-//        $this->markTestSkipped();
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $card = new TextCard();
         $card->setTitle('测试卡片');
         $card->setDescription('卡片描述');
@@ -119,7 +141,10 @@ class SendMessageRequestTest extends TestCase
 
     public function testSendNewsMessage()
     {
-//        $this->markTestSkipped();
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $news1 = new NewsArticle();
         $news1->setTitle('测试标题11')
               ->setDescription('测试描述11')
@@ -143,7 +168,10 @@ class SendMessageRequestTest extends TestCase
 
     public function testSendMPNewsMessage()
     {
-//        $this->markTestSkipped();
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $news1 = new MPNewsArticle();
         $news1->setTitle('测试标题11')
               ->setContent('测试内容11')

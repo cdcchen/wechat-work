@@ -25,8 +25,12 @@ class MediaClientTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        /** @var AccessToken $token */
-        $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        if (SKIP_REAL_REQUEST) {
+            $token = new AccessToken(__METHOD__, 7200);
+        } else {
+            /** @var AccessToken $token */
+            $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        }
         static::$accessToken = $token->getToken();
     }
 
@@ -37,6 +41,10 @@ class MediaClientTest extends TestCase
 
     public function testUploadFile()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $result = $this->client->uploadFile(__DIR__ . '/file.txt');
         $this->assertArrayHasKey('media_id', $result);
         sleep(1);
@@ -46,6 +54,10 @@ class MediaClientTest extends TestCase
 
     public function testUploadImage()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $result = $this->client->uploadImage(__DIR__ . '/image.png');
         $this->assertArrayHasKey('media_id', $result);
         sleep(1);
@@ -53,6 +65,10 @@ class MediaClientTest extends TestCase
 
     public function testUploadVoice()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $result = $this->client->uploadVoice(__DIR__ . '/voice.amr');
         $this->assertArrayHasKey('media_id', $result);
         sleep(1);
@@ -60,6 +76,10 @@ class MediaClientTest extends TestCase
 
     public function testUploadVideo()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $result = $this->client->uploadVideo(__DIR__ . '/video.mp4');
         $this->assertArrayHasKey('media_id', $result);
         sleep(1);
@@ -71,6 +91,10 @@ class MediaClientTest extends TestCase
      */
     public function testGetMedia(string $mediaId)
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $data = $this->client->get($mediaId);
         $this->assertTrue(strlen($data) > 0);
     }

@@ -25,8 +25,12 @@ class AgentListRequestTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        /** @var AccessToken $token */
-        $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        if (SKIP_REAL_REQUEST) {
+            $token = new AccessToken(__METHOD__, 7200);
+        } else {
+            /** @var AccessToken $token */
+            $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        }
         static::$accessToken = $token->getToken();
     }
 
@@ -42,6 +46,10 @@ class AgentListRequestTest extends TestCase
 
     public function testSend()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $data = $this->request->send();
         $this->assertTrue(is_array($data));
     }
@@ -52,6 +60,10 @@ class AgentListRequestTest extends TestCase
      */
     public function testAttributeExist(string $attr)
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $data = $this->request->send();
         if (empty($data)) {
             $this->markTestSkipped('agent list is empty, skip.');

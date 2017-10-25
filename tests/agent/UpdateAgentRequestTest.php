@@ -25,8 +25,12 @@ class UpdateAgentRequestTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        /** @var AccessToken $token */
-        $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        if (SKIP_REAL_REQUEST) {
+            $token = new AccessToken(__METHOD__, 7200);
+        } else {
+            /** @var AccessToken $token */
+            $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        }
         static::$accessToken = $token->getToken();
     }
 
@@ -68,6 +72,10 @@ class UpdateAgentRequestTest extends TestCase
      */
     public function testSend(UpdateAgentRequest $request)
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $result = $request->send();
         $this->assertTrue($result);
     }

@@ -37,6 +37,10 @@ class MessageClientTest extends TestCase
 
     public function testSendText()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $data = $this->client->sendText(AGENT_ID, '测试文本内容', [USER_ID]);
         $this->assertTrue(is_array($data));
     }

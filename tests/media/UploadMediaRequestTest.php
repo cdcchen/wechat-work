@@ -26,8 +26,12 @@ class UploadMediaRequestTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        /** @var AccessToken $token */
-        $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        if (SKIP_REAL_REQUEST) {
+            $token = new AccessToken(__METHOD__, 7200);
+        } else {
+            /** @var AccessToken $token */
+            $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        }
         static::$accessToken = $token->getToken();
     }
 
@@ -38,6 +42,10 @@ class UploadMediaRequestTest extends TestCase
 
     public function testUploadMediaFile()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $filename = __DIR__ . '/file.txt';
         $this->request->setType(MediaType::FILE)
                       ->setMedia($filename);
@@ -48,6 +56,10 @@ class UploadMediaRequestTest extends TestCase
 
     public function testUploadMediaImage()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $request = (new UploadMediaRequest())->setAccessToken(static::$accessToken);
 
         $filename = __DIR__ . '/image.png';

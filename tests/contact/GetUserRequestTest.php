@@ -34,6 +34,10 @@ class GetUserRequestTest extends TestCase
 
     public function testSend()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         /** @var AccessToken $accessToken */
         $accessToken = (new AccessTokenRequest())->setCredential(CORP_ID, CORP_SECRET)->send();
         $user = $this->request->setAccessToken($accessToken->getToken())->setUserId(USER_ID)->send();

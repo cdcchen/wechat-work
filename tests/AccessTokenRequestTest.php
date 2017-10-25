@@ -54,6 +54,10 @@ class AccessTokenRequestTest extends TestCase
 
     public function testSend()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         /* @var AccessToken $accessToken */
         $accessToken = $this->request->setCredential(CORP_ID, CORP_SECRET)->send();
 

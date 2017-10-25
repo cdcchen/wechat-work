@@ -22,13 +22,21 @@ class GetMediaRequestTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        /** @var AccessToken $token */
-        $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        if (SKIP_REAL_REQUEST) {
+            $token = new AccessToken(__METHOD__, 7200);
+        } else {
+            /** @var AccessToken $token */
+            $token = (new AccessTokenRequest())->setCredential(CORP_ID, AGENT_SECRET)->send();
+        }
         static::$accessToken = $token->getToken();
     }
 
     public function testUploadMedia()
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $request = (new UploadMediaRequest())->setAccessToken(static::$accessToken);
 
         $filename = __DIR__ . '/image.png';
@@ -47,6 +55,10 @@ class GetMediaRequestTest extends TestCase
      */
     public function testGetMedia(string $mediaId)
     {
+        if (SKIP_REAL_REQUEST) {
+            $this->markTestSkipped('Skip real api http request test.');
+        }
+
         $request = (new GetMediaRequest())->setAccessToken(static::$accessToken)->setMediaId($mediaId);
         $content = $request->send();
         $this->assertTrue(strlen($content) > 0);
