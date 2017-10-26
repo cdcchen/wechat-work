@@ -43,4 +43,14 @@ class PrpCryptTest extends TestCase
 
         $this->assertEquals($text, $decrypted);
     }
+
+    public function testDecrypt2()
+    {
+        $encrypted = 'SGA8bkNjYeWW/zcB1C22NWnJGz/Ksq+7VI45jF+fXNQSXVu7d3YakZrNFiC/HXwK7R4W50K39jkgVnumQuQi6g==';
+        $crypt = new PrpCrypt(CB_ENCODING_AES_KEY);
+        $decrypted = $crypt->decrypt($encrypted);
+
+        $text = 'hello';
+        $this->assertEquals($text, $decrypted);
+    }
 }

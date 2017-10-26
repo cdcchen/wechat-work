@@ -68,10 +68,13 @@ class SendMessageRequestTest extends TestCase
         if (SKIP_REAL_REQUEST) {
             $this->markTestSkipped('Skip real api http request test.');
         }
+        if (!IMAGE_MEDIA_ID) {
+            $this->markTestSkipped('Skip real api http request test, image media_id is not provided.');
+        }
 
         $message = (new ImageMessage())->setToUser([USER_ID])
                                        ->setAgentId(AGENT_ID)
-                                       ->setMediaId('27r7HtwGGexjynp4x5uG2wpgVCx2cAfz3NXNBPIcnhGs');
+                                       ->setMediaId(IMAGE_MEDIA_ID);
         $data = $this->request->setMessage($message)->send();
         $this->assertTrue(is_array($data));
     }
@@ -81,10 +84,13 @@ class SendMessageRequestTest extends TestCase
         if (SKIP_REAL_REQUEST) {
             $this->markTestSkipped('Skip real api http request test.');
         }
+        if (!VOICE_MEDIA_ID) {
+            $this->markTestSkipped('Skip real api http request test, voice media_id is not provided.');
+        }
 
         $message = (new VoiceMessage())->setToUser([USER_ID])
                                        ->setAgentId(AGENT_ID)
-                                       ->setMediaId('2gFNOQkEGGLyx76Cnq2Y98BVGJ3pQ9esZXPUTWKSYIdI');
+                                       ->setMediaId(VOICE_MEDIA_ID);
         $data = $this->request->setMessage($message)->send();
         $this->assertTrue(is_array($data));
     }
@@ -94,11 +100,14 @@ class SendMessageRequestTest extends TestCase
         if (SKIP_REAL_REQUEST) {
             $this->markTestSkipped('Skip real api http request test.');
         }
+        if (!VIDEO_MEDIA_ID) {
+            $this->markTestSkipped('Skip real api http request test, video media_id is not provided.');
+        }
 
         $message = (new VideoMessage())->setToUser([USER_ID])
                                        ->setAgentId(AGENT_ID)
                                        ->setVideo(
-                                           '3C123CKuqf0hS5FyXnlitL2f4CQ4YA9IjHwz4SZ1WdokPWlXsg_63ORDNddwzwrJ6',
+                                           VIDEO_MEDIA_ID,
                                            '测试视频',
                                            '这是一个小视频');
 
@@ -111,10 +120,13 @@ class SendMessageRequestTest extends TestCase
         if (SKIP_REAL_REQUEST) {
             $this->markTestSkipped('Skip real api http request test.');
         }
+        if (!FILE_MEDIA_ID) {
+            $this->markTestSkipped('Skip real api http request test, video media_id is not provided.');
+        }
 
         $message = (new FileMessage())->setToUser([USER_ID])
                                       ->setAgentId(AGENT_ID)
-                                      ->setMediaId('26JzmBovgqgEIHEuy3DH49K9zvVy_5NdTOK3OXnRaUvA0z8VuMyhflp5eO7gM_sEc');
+                                      ->setMediaId(FILE_MEDIA_ID);
 
         $data = $this->request->setMessage($message)->send();
         $this->assertTrue(is_array($data));

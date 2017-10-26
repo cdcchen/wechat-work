@@ -23,12 +23,16 @@ class PrpCrypt
     /**
      * Cipher method
      */
-    const CIPHER_METHOD = 'AES-128-CBC';
+    const CIPHER_METHOD = 'aes-256-cbc';
 
     /**
      * @var string
      */
     private $encodingAesKey;
+    /**
+     * @var string
+     */
+    private $initVector;
 
     /**
      * PrpCrypt constructor.
@@ -37,6 +41,7 @@ class PrpCrypt
     public function __construct($key)
     {
         $this->encodingAesKey = base64_decode($key . '=');
+        $this->initVector = substr($this->encodingAesKey, 0, 16);
     }
 
     /**
@@ -56,10 +61,13 @@ class PrpCrypt
         //使用自定义的填充方式对明文进行补位填充
         $text = PKCS7Encoder::encode($text);
 
-        $iv = $this->getInitVector();
-        $encrypted = openssl_encrypt($text, self::CIPHER_METHOD, $this->encodingAesKey, 0, $iv);
+        $encrypted = openssl_encrypt(
+            $text,
+            self::CIPHER_METHOD,
+            $this->encodingAesKey,
+            OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING,
+            $this->initVector);
 
-        // 使用BASE64对加密后的字符串进行编码
         return base64_encode($encrypted);
     }
 
@@ -71,21 +79,23 @@ class PrpCrypt
      */
     public function decrypt($encrypted): string
     {
-        //使用BASE64对需要解密的字符串进行解码
-        $cipherText = base64_decode($encrypted);
-        $iv = $this->getInitVector();
-        $decrypted = openssl_decrypt($cipherText, self::CIPHER_METHOD, $this->encodingAesKey, 0, $iv);
-
+        $decrypted = openssl_decrypt(
+            base64_decode($encrypted),
+            self::CIPHER_METHOD,
+            $this->encodingAesKey,
+            OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING,
+            $this->initVector);
         //去除补位字符
         $result = PKCS7Encoder::decode($decrypted);
 
         //去除16位随机字符串,网络字节序和AppId
-        if (strlen($result) < self::RANDOM_STRING_LEN) {
+        $resultLen = strlen($result);
+        if ($resultLen < self::RANDOM_STRING_LEN) {
             return '';
         }
 
-        $content = substr($result, self::RANDOM_STRING_LEN);
-        list(, $xmlContentLen) = unpack('N', substr($content, 0, 4));
+        $content = substr($result, self::RANDOM_STRING_LEN, $resultLen);
+        [1 => $xmlContentLen] = unpack('N', substr($content, 0, 4));
 
         return substr($content, 4, $xmlContentLen);
     }
@@ -106,13 +116,5 @@ class PrpCrypt
         }
 
         return $str;
-    }
-
-    /**
-     * @return string
-     */
-    private function getInitVector(): string
-    {
-        return substr($this->encodingAesKey, 0, 16);
     }
 }

@@ -74,6 +74,14 @@ class PushMessage extends AttributeArray
     }
 
     /**
+     * @return bool
+     */
+    public function isEvent(): bool
+    {
+        return $this->getMsgType() === self::TYPE_EVENT;
+    }
+
+    /**
      * @return null|string
      */
     public function getAgentId(): ?string
@@ -111,14 +119,6 @@ class PushMessage extends AttributeArray
     public function getMsgType(): string
     {
         return $this->get('MsgType');
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getEvent(): ?string
-    {
-        return $this->get('Event');
     }
 
     /**
