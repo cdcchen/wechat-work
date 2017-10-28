@@ -154,9 +154,9 @@ class PushMessageTest extends TestCase
      * @param PushMessage $msg
      * @depends testInstance
      */
-    public function testGetEventKey(PushMessage $msg)
+    public function testGetEvent(PushMessage $msg)
     {
-        $this->assertEquals('view_result', $msg->getEventKey());
+        $this->assertEquals('click', $msg->getEvent());
     }
 
     private static function xmlData()

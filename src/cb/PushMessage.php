@@ -124,8 +124,8 @@ class PushMessage extends AttributeArray
     /**
      * @return null|string
      */
-    public function getEventKey(): ?string
+    public function getEvent(): ?string
     {
-        return $this->get('EventKey');
+        return $this->get('Event');
     }
 }
