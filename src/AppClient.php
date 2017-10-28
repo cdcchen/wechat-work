@@ -6,10 +6,9 @@
  * Time: 17:47
  */
 
-namespace cdcchen\wework\msg;
+namespace cdcchen\wework;
 
 
-use cdcchen\wework\AccessTokenRequest;
 use cdcchen\wework\base\AccessToken;
 
 /**

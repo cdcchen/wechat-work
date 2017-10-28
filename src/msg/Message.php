@@ -56,7 +56,12 @@ class Message extends AttributeArray
      */
     public function appendToUser(string $userId): self
     {
-        $this->append('touser', $userId);
+        if ($users = $this->get('touser')) {
+            $this->set('touser', $users . '|' . $userId);
+        } else {
+            $this->set('touser', $userId);
+        }
+
         return $this;
     }
 
@@ -65,35 +70,48 @@ class Message extends AttributeArray
      */
     public function getToUser(): ?array
     {
-        return $this->get('touser');
+        if ($users = $this->get('touser')) {
+            return explode('|', $users);
+        }
+
+        return null;
     }
 
     /**
-     * @param array $departIds
+     * @param array $partyIds
      * @return static
      */
-    public function setToDepart(array $departIds): self
+    public function setToParty(array $partyIds): self
     {
-        $this->set('toparty', join('|', $departIds));
+        $this->set('toparty', join('|', $partyIds));
         return $this;
     }
 
     /**
-     * @param string $departId
+     * @param string $partyId
      * @return static
      */
-    public function appendToDepart(string $departId): self
+    public function appendToParty(string $partyId): self
     {
-        $this->append('toparty', $departId);
+        if ($partyIds = $this->get('toparty')) {
+            $this->set('toparty', $partyIds . '|' . $partyId);
+        } else {
+            $this->set('toparty', $partyId);
+        }
+
         return $this;
     }
 
     /**
      * @return array|null
      */
-    public function getToDepart(): ?array
+    public function getToParty(): ?array
     {
-        return $this->get('toparty');
+        if ($party = $this->get('toparty')) {
+            return explode('|', $party);
+        }
+
+        return null;
     }
 
     /**
@@ -112,7 +130,12 @@ class Message extends AttributeArray
      */
     public function appendToTag(string $tagId): self
     {
-        $this->append('totag', $tagId);
+        if ($tagIds = $this->get('totag')) {
+            $this->set('totag', $tagIds . '|' . $tagId);
+        } else {
+            $this->set('totag', $tagId);
+        }
+
         return $this;
     }
 
@@ -121,7 +144,11 @@ class Message extends AttributeArray
      */
     public function getToTag(): ?array
     {
-        return $this->get('totag');
+        if ($tag = $this->get('totag')) {
+            return explode('|', $tag);
+        }
+
+        return null;
     }
 
     /**

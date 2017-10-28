@@ -11,6 +11,7 @@ namespace cdcchen\wework;
 
 use cdcchen\http\HttpResponse;
 use cdcchen\wework\base\AccessToken;
+use cdcchen\wework\base\ApiError;
 use cdcchen\wework\base\BaseRequest;
 use Fig\Http\Message\RequestMethodInterface;
 
@@ -59,6 +60,10 @@ class AccessTokenRequest extends BaseRequest
 
     protected function handleResponse(HttpResponse $response): AccessToken
     {
+        // return body is null
+        if ((string)$response->getBody() === '') {
+            throw new ApiError('invalid credential', 40001);
+        }
         $data = $response->getData();
         return new AccessToken($data['access_token'], $data['expires_in']);
     }

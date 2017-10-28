@@ -13,6 +13,35 @@ use cdcchen\wework\base\AttributeArray;
 
 class NewsArticle extends AttributeArray
 {
+    /**
+     * @param string $title
+     * @param string $description
+     * @param string $url
+     * @param string|null $picUrl
+     * @param string|null $btnText
+     * @return NewsArticle
+     */
+    public function setDetail(
+        string $title,
+        string $description,
+        string $url,
+        string $picUrl = null,
+        string $btnText = null
+    ): self {
+        $this->set('title', $title);
+        $this->set('description', $description);
+        $this->set('url', $url);
+
+        if (!empty($picUrl)) {
+            $this->set('picurl', $picUrl);
+        }
+        if (!empty($btnText)) {
+            $this->set('btntxt', $btnText);
+        }
+
+        return $this;
+    }
+
     public function setTitle(string $title): self
     {
         $this->set('title', $title);

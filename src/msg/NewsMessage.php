@@ -19,20 +19,17 @@ class NewsMessage extends Message
 
     /**
      * @param array $articles
-     * @return NewsMessage
+     * @return static
      */
     public function setArticles(array $articles): self
     {
-        foreach ($articles as $index => $article) {
-            if ($article instanceof NewsArticle) {
-                $articles[$index] = $article->toArray();
-            }
-        }
         $this->set('news', ['articles' => $articles]);
-
         return $this;
     }
 
+    /**
+     * @return array|null
+     */
     public function getArticles(): ?array
     {
         if (($media = $this->get('news'))) {

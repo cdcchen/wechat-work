@@ -125,12 +125,11 @@ abstract class BaseRequest
             $client->setFormat($this->format);
         }
         $response = $client->request($this->getRequest());
-
         if (!$response->isOK()) {
             throw new RequestException($response->getReasonPhrase(), $response->getStatusCode());
         }
 
-        $data = $response->getData();;
+        $data = $response->getData();
         if ($data !== null && ($errorCode = (int)$data['errcode']) !== ErrorCode::OK) {
             throw new ApiError($data['errmsg'], $errorCode);
         }

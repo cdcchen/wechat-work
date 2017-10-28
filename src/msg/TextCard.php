@@ -19,6 +19,25 @@ class TextCard extends AttributeArray
 {
     /**
      * @param string $title
+     * @param string $description
+     * @param string $url
+     * @param string|null $btnText
+     * @return static
+     */
+    public function setDetail(string $title, string $description, string $url, string $btnText = null): self
+    {
+        $this->set('title', $title);
+        $this->set('description', $description);
+        $this->set('url', $url);
+        if (!empty($btnText)) {
+            $this->set('btntxt', $btnText);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $title
      * @return static
      */
     public function setTitle(string $title): self
@@ -36,14 +55,6 @@ class TextCard extends AttributeArray
     }
 
     /**
-     * @return null|string
-     */
-    public function getDescription(): ?string
-    {
-        return $this->get('description');
-    }
-
-    /**
      * @param string $description
      * @return static
      */
@@ -51,6 +62,14 @@ class TextCard extends AttributeArray
     {
         $this->set('description', $description);
         return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->get('description');
     }
 
     /**

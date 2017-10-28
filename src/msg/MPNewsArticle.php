@@ -19,6 +19,40 @@ class MPNewsArticle extends AttributeArray
 {
     /**
      * @param string $title
+     * @param string $thumbMediaId
+     * @param string $content
+     * @param string|null $digest
+     * @param string|null $contentSourceUrl
+     * @param string|null $author
+     * @return static
+     */
+    public function setDetail(
+        string $title,
+        string $thumbMediaId,
+        string $content,
+        string $digest = null,
+        string $contentSourceUrl = null,
+        string $author = null
+    ): self {
+        $this->set('title', $title);
+        $this->set('thumb_media_id', $thumbMediaId);
+        $this->set('content', $content);
+
+        if (!empty($digest)) {
+            $this->set('digest', $digest);
+        }
+        if (!empty($contentSourceUrl)) {
+            $this->set('content_source_url', $contentSourceUrl);
+        }
+        if (!empty($author)) {
+            $this->set('author', $author);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $title
      * @return static
      */
     public function setTitle(string $title): self

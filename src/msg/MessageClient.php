@@ -137,7 +137,7 @@ class MessageClient extends BaseClient
 
     /**
      * @param int $agentId
-     * @param array $articles
+     * @param NewsArticle[] $articles
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
@@ -156,7 +156,7 @@ class MessageClient extends BaseClient
 
     /**
      * @param int $agentId
-     * @param array $articles
+     * @param MPNewsArticle[] $articles
      * @param array|null $toUser
      * @param array|null $toDepart
      * @param array|null $toTag
@@ -189,16 +189,19 @@ class MessageClient extends BaseClient
         array $toTag = null
     ): array {
         $message->setAgentId($agentId);
+
         if ($toUser !== null) {
             $message->setToUser($toUser);
         }
         if ($toDepart !== null) {
-            $message->setToDepart($toDepart);
+            $message->setToParty($toDepart);
         }
         if ($toTag !== null) {
             $message->setToTag($toTag);
         }
+
         $request = (new SendMessageRequest())->setMessage($message);
+
         return $this->send($request);
     }
 }

@@ -23,13 +23,7 @@ class MPNewsMessage extends Message
      */
     public function setArticles(array $articles): self
     {
-        foreach ($articles as $index => $article) {
-            if ($article instanceof MPNewsArticle) {
-                $articles[$index] = $article->toArray();
-            }
-        }
         $this->set('mpnews', ['articles' => $articles]);
-
         return $this;
     }
 
