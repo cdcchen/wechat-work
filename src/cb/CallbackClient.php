@@ -78,8 +78,8 @@ class CallbackClient
     {
         $timestamp = time();
         $nonce = uniqid(microtime(true), true);
-        $signature = CallbackCredential::getSHA1($this->credential->getToken(), $timestamp, $nonce, $content);
         $encrypted = (new PrpCrypt($this->credential->getEncodingAesKey()))->encrypt($content, $this->corpId);
+        $signature = CallbackCredential::getSHA1($this->credential->getToken(), $timestamp, $nonce, $encrypted);
 
         return '<Xml>'
             . "<Encrypt><![CDATA[{$encrypted}]]></Encrypt>"
