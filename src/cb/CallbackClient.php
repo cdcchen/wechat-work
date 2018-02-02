@@ -81,12 +81,12 @@ class CallbackClient
         $encrypted = (new PrpCrypt($this->credential->getEncodingAesKey()))->encrypt($content, $this->corpId);
         $signature = CallbackCredential::getSHA1($this->credential->getToken(), $timestamp, $nonce, $encrypted);
 
-        return '<Xml>'
+        return '<xml>'
             . "<Encrypt><![CDATA[{$encrypted}]]></Encrypt>"
             . "<MsgSignature><![CDATA[{$signature}]]></MsgSignature>"
             . "<TimeStamp>{$timestamp}</TimeStamp>"
             . "<Nonce><![CDATA[{$nonce}]]></Nonce>"
-            . '</Xml>';
+            . '</xml>';
     }
 
     /**

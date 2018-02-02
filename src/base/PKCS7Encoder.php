@@ -28,7 +28,7 @@ class PKCS7Encoder
     public static function encode($text): string
     {
         $padCount = self::BLOCK_SIZE - (strlen($text) % self::BLOCK_SIZE);
-        $padChar = chr($padCount ?: ($padCount + self::BLOCK_SIZE));
+        $padChar = chr($padCount === 0 ? $padCount : self::BLOCK_SIZE);
 
         return $text . str_repeat($padChar, $padCount);
     }
