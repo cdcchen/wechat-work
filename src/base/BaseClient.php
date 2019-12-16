@@ -19,15 +19,23 @@ abstract class BaseClient
      * @var string
      */
     protected $accessToken;
+  /**
+   * @var
+   */
+    protected $agentId;
 
-    /**
-     * BaseClient constructor.
-     * @param string|null $accessToken
-     */
-    public function __construct(string $accessToken = null)
+  /**
+   * BaseClient constructor.
+   * @param string|null $accessToken
+   * @param string|null $agentId
+   */
+    public function __construct(string $accessToken = null, string $agentId = null)
     {
         if ($accessToken !== null) {
             $this->accessToken = $accessToken;
+        }
+        if (!empty($agentId)) {
+            $this->agentId = $agentId;
         }
     }
 
@@ -49,10 +57,11 @@ abstract class BaseClient
         return $this->accessToken;
     }
 
-    /**
-     * @param BaseRequest $request
-     * @return mixed
-     */
+  /**
+   * @param BaseRequest $request
+   * @return mixed
+   * @throws \cdcchen\http\RequestException
+   */
     public function send(BaseRequest $request)
     {
         return $request->setAccessToken($this->accessToken)->send();
